@@ -34,6 +34,18 @@ app.get('/family', function(req, res){
     res.render('family');
 });
 
+app.get('/family/dad', function(req, res){
+    res.render('dad');
+});
+
+app.get('/family/mom', function(req, res){
+    res.render('mom');
+});
+
+app.get('/family/sister', function(req, res){
+    res.render('sister');
+});
+
 app.get('/contactme', function(req, res){
     res.render('contactme');
 });
