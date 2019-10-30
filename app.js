@@ -1,8 +1,12 @@
 var express = require('express');
 var app = express();
+var bodyParser = require('body-parser');
 
+var urlencodedParser = bodyParser.urlencoded({extended : false});
+var jsonParser = bodyParser.json();
 var port = process.env.PORT || 3000;
 
+app.use(bodyParser.urlencoded({extended:true}));
 app.use('/assets', express.static(__dirname + '/public'));
 
 app.set('views', __dirname + '/views');
@@ -50,23 +54,12 @@ app.get('/contactme', function(req, res){
     res.render('contactme');
 });
 
-// app.post('/person', urlencodedParser, function(req,res){
-//     res.send('Thank you!');
-//     console.log(req.body.first_name);
-//     console.log(req.body.last_name);
-// });
-
-// app.post('/personjson', jsonParser, function(req, res){
-//     res.send('Thank you for the JSON data!');
-//     console.log(req.body.first_name);
-//     console.log(req.body.last_name);
-// });
-
-app.post('/form', (req, res) => {
-    const first_name = req.body.first-name;
-    const last_name = req.body.last-name;
-    const phone = req.body.phone;
-    const email = req.body.email;
+app.post('/contactme', urlencodedParser, (req, res) => {
+    res.send("Thank you for your information!");
+    console.log(req.body.first_name);
+    console.log(req.body.last_name);
+    console.log(req.body.email);
+    console.log(req.body.phone);
   });
 
 app.listen(port);
