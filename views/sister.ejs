@@ -12,7 +12,12 @@
 </style>
 <body>
     <% include ./nav.ejs %>
-    <% include ./familynav.ejs %>
+    <% for  (var i = 0; i < famMems.length; i++){ %>
+      <% var output = famMems[i].Name; %>
+      <button name = "buttonname" style="background:red; color:black; font-size: 32px; height: 60px; width: 180px">
+        <a href="/family/<%=output %>"><%= output %></a>
+      </button>
+    <%}%>  
 
     <h1>My sister is the person I got to grow up with and learn from.</h1>
     <h2>He is two years older than me and is a cool cat.</h2>

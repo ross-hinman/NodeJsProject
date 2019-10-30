@@ -34,20 +34,22 @@ app.get('/cats', function(req, res){
     res.render('cats');
 });
 
+var famMems = require('./faminfo.json');
+
 app.get('/family', function(req, res){
-    res.render('family');
+    res.render('family', {famMems: famMems});
 });
 
 app.get('/family/dad', function(req, res){
-    res.render('dad');
+    res.render('dad', {famMems: famMems});
 });
 
 app.get('/family/mom', function(req, res){
-    res.render('mom');
+    res.render('mom', {famMems: famMems});
 });
 
 app.get('/family/sister', function(req, res){
-    res.render('sister');
+    res.render('sister', {famMems: famMems});
 });
 
 app.get('/contactme', function(req, res){
