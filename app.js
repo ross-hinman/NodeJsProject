@@ -6,6 +6,7 @@ var urlencodedParser = bodyParser.urlencoded({extended : false});
 var jsonParser = bodyParser.json();
 var port = process.env.PORT || 3000;
 
+
 app.use(bodyParser.urlencoded({extended:true}));
 app.use('/assets', express.static(__dirname + '/public'));
 
@@ -54,6 +55,27 @@ app.get('/family/sister', function(req, res){
 
 app.get('/contactme', function(req, res){
     res.render('contactme');
+});
+
+var mysql = require('mysql');
+
+app.use('/', function (req, res, next){
+    console.log('Request Url:' + req.url);
+
+    var con = mysql.createConnection({
+        host: "localhost",
+        user: "admin",
+        password: "password",
+        database: "nodeproject_db"
+    });
+
+    con.query("INSERT INTO form_submission (first_name, last_name, email, phone)",
+        function(err, rows){
+            if(err) throw err;
+            console.log(rows[0].First_name)
+        }
+    );
+    next();
 });
 
 app.post('/contactme', urlencodedParser, (req, res) => {
