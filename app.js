@@ -59,31 +59,6 @@ app.get('/contactme', function(req, res){
 
 var mysql = require('mysql');
 
-// app.use('/', function (req, res, next){
-//     console.log('Request Url:' + req.url);
-
-    
-
-//     con.connect(function(err) {
-//         if (err) throw err;
-//         console.log("Connected!");
-//         var sql = "INSERT INTO customers (name, address) VALUES ?";
-//         var values = [
-//           ['John', 'Highway 71']
-//         ];
-//         con.query(sql, [values], function (err, result) {
-//           if (err) throw err;
-//           console.log("Number of records inserted: " + result.affectedRows);
-//         });
-//       });
-//     con.query("INSERT INTO nodeproject_db form_submission  (first_name, last_name, email, phone)",
-//         function(err, rows){
-//             if(err) throw err;
-//             console.log(rows[0].First_name)
-//         }
-//     );
-//     next();
-// });
 
 app.post('/contactme', urlencodedParser, (req, res) => {
     res.send("Thank you for your information!");
@@ -91,6 +66,11 @@ app.post('/contactme', urlencodedParser, (req, res) => {
     console.log(req.body.last_name);
     console.log(req.body.email);
     console.log(req.body.phone);
+
+    if (req.body.first_name == "" || !req.body.first_name || !req.body.last_name || !req.body.email || !req.body.phone){
+        res.status(500);
+        res.render('error', 'form info is missing, submit first_name, last_name, email, and phone');
+    };
 
     var con = mysql.createConnection({
         host: "localhost",
@@ -108,3 +88,27 @@ app.post('/contactme', urlencodedParser, (req, res) => {
   });
 
 app.listen(port);
+
+app.get('/userlist',(req, res) => {
+    var con = mysql.createConnection({
+        host: "localhost",
+        user: "root",
+        password: "password",
+        database: "nodeproject_db"
+    });
+    con.connect(function(err) {
+        if(err) throw err;
+        else {
+            con.query("SELECT first_name, last_name, email FROM form_submission",(err, result) => {
+                if(err) {
+                    console.log(err); 
+                    res.json({"error":true});
+                }
+                else { 
+                    console.log(result); 
+                    res.render('userlist', {q_result: result}); 
+                }
+            });
+        }
+    });
+});

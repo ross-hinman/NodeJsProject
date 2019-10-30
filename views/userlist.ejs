@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<head>
+    <title>User List</title>
+</head>
+<!-- <style>
+    body{
+        background-image: url('https://www.traegergrills.com/images/en-us/Recipes/2019/Feb%202019/20190116_BBQ-Ribs-By-Amanda-Haas_RE_HE_M.jpg');
+        background-repeat:no-repeat;
+        background-size:cover;
+        color:white;
+    }
+</style> -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Data from MySQL</title>
+    </head>
+    <style>
+        body{
+            background-color: black;
+            color:white;
+        }
+    </style>
+    <% include ./nav.ejs %>
+    <body>
+        <h1>User List:</h1>
+        <h2>
+        <table>
+            <% q_result.forEach(function(item, index){%>
+                <tr>
+                    <td>Name: <%= item.first_name %> <%=
+                    item.last_name %> </td>
+                    <td>Email: <%= item.email %></td>
+                </tr>
+                <% }); %>
+        </table>
+    </h2>
+    </body>
+</html>
