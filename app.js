@@ -35,10 +35,13 @@ app.get('/cats', function(req, res){
     res.render('cats');
 });
 
-var famMems = require('./faminfo.json');
 
-app.get('/family', function(req, res){
-    res.render('family', {famMems: famMems});
+
+app.get('/family/:id', function(req, res){
+    var famMems = faminfo.family[req.params.id];;
+    console.log(famMems);
+    res.render('family', {name: req.params.id, famMems: faminfo, age: famMems, state: famMems});
+
 });
 
 app.get('/family/dad', function(req, res){
