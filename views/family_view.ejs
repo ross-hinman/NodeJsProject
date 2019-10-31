@@ -11,11 +11,12 @@
           text-align: center;
         }
 </style>
+<% include ./nav.ejs %>
 <body>
-    <% include ./nav.ejs %>
-    <a href="/family/Don">Dad</a>
-    <a href="/family/Joni">Mom</a>
-    <a href="/family/Amy">Sister</a>
+    <h3 style="text-align-last: center;"><%= person.name %></h3>
+    <p>Age: <%= person.age %></p>
+    <p>Gender: <%= person.state %></p>
+    <p>Connection: <%= person.connection %></p>
     
 </body>
 </html>

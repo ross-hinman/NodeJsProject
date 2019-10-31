@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 var urlencodedParser = bodyParser.urlencoded({extended : false});
 var jsonParser = bodyParser.json();
 var port = process.env.PORT || 3000;
+var content = require('./faminfo.json');
 
 
 app.use(bodyParser.urlencoded({extended:true}));
@@ -35,25 +36,15 @@ app.get('/cats', function(req, res){
     res.render('cats');
 });
 
-
+app.get('/family', function(req, res){
+    var fam_details = [content];
+    res.render('family');
+});
 
 app.get('/family/:id', function(req, res){
-    var famMems = faminfo.family[req.params.id];;
-    console.log(famMems);
-    res.render('family', {name: req.params.id, famMems: faminfo, age: famMems, state: famMems});
-
-});
-
-app.get('/family/dad', function(req, res){
-    res.render('dad', {famMems: famMems});
-});
-
-app.get('/family/mom', function(req, res){
-    res.render('mom', {famMems: famMems});
-});
-
-app.get('/family/sister', function(req, res){
-    res.render('sister', {famMems: famMems});
+    var person = content.family[req.params.id];
+    console.log(person);
+    res.render('family_view', {person: person});
 });
 
 app.get('/contactme', function(req, res){

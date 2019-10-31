@@ -1,20 +1,23 @@
 
 {
     "family":{
-        "dad":{
+        "Don":{
             "name":"Don",
             "age":"68",
-            "state":"MI"
+            "state":"MI",
+            "connection":"dad"
         },
-        "mom":{
+        "Joni":{
             "name":"Joni",
             "age":"60",
-            "state":"MI"
+            "state":"MI",
+            "connection":"mom"
         },
-        "sister":{
+        "Amy":{
             "name":"Amy",
             "age":"28",
-            "state":"MI"
+            "state":"MI",
+            "connection":"sister"
         }  
     }    
 }
