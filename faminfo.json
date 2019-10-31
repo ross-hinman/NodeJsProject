@@ -5,19 +5,19 @@
             "name":"Don",
             "age":"68",
             "state":"MI",
-            "connection":"dad"
+            "connection":"Dad"
         },
         "Joni":{
             "name":"Joni",
             "age":"60",
             "state":"MI",
-            "connection":"mom"
+            "connection":"Mom"
         },
         "Amy":{
             "name":"Amy",
             "age":"28",
             "state":"MI",
-            "connection":"sister"
+            "connection":"Sister"
         }  
     }    
 }

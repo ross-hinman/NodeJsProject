@@ -13,10 +13,10 @@
 </style>
 <% include ./nav.ejs %>
 <body>
-    <h3 style="text-align-last: center;"><%= person.name %></h3>
-    <p>Age: <%= person.age %></p>
-    <p>Gender: <%= person.state %></p>
-    <p>Connection: <%= person.connection %></p>
-    
+    <h3 style="text-align-last: center; font-size: 36px;"><%= person.name %></h3>
+    <p style="font-size: 32px; color: white;">Age: <%= person.age %></p>
+    <p style="font-size: 32px; color: white;">Location: <%= person.state %></p>
+    <p style="font-size: 32px; color: white;">Connection: <%= person.connection %></p>
+    <a href="/family" style="font-size: 32px; color:white; font-weight: 600;">Back</a>
 </body>
 </html>

@@ -1,0 +1,40 @@
+{
+    "home":{
+        
+    },
+    "about_me":{
+
+    },
+    "cats":{
+
+    },
+    "food":{
+
+    },
+    "family":{
+        "dad":{
+            "name":"Don",
+            "age":"68",
+            "location":"MI",
+            "connection":"dad"
+        },
+        "mom":{
+            "name":"Joni",
+            "age":"60",
+            "location":"MI",
+            "connection":"mom"
+        },
+        "sister":{
+            "name":"Amy",
+            "age":"28",
+            "location":"MI",
+            "connection":"sister"
+        }
+    },
+    "contact_me":{
+
+    },
+    "user_list":{
+
+    }
+}
