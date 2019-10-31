@@ -1,11 +1,19 @@
 [
     {
-        "Name":"dad"
-    },
-    {
-        "Name":"mom"
-    },
-    {
-        "Name":"sister"
+        "dad":{
+            "name":"Don",
+            "age":"68",
+            "state":"MI"
+        },
+        "mom":{
+            "name":"Joni",
+            "age":"60",
+            "state":"MI"
+        },
+        "sister":{
+            "name":"Amy",
+            "age":"28",
+            "state":"MI"
+        }   
     }
 ]
