@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title></title>
+    <script src="app.js"></script>
 </head>
 <style>
         body {
@@ -20,5 +21,12 @@
     <br />
     <h1 style = "text-align: center; background-color:rgba(255, 255, 255, 0.6);color:black; font-size: 36px;">This is Ross Hinman's Website about Stuff.</h1>
     <img src="/assets/block_s.jpg" style = "height: 150px; width: 200px; margin-left: 5%;">
+    <h1>This Week's Forecast</h1>
+        <div>
+            <button type="button" onclick="loadData()">Get Forecast</button>
+        </div>
+        <div>
+            <ul id ="weather"></ul>
+        </div>
 </body>
 </html>
