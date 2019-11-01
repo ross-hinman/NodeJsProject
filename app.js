@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+var mongo = require('mongodb').MongoClient
 
 var urlencodedParser = bodyParser.urlencoded({extended : false});
 var jsonParser = bodyParser.json();
@@ -68,19 +69,56 @@ app.get('/contactme', function(req, res){
 });
 
 var mysql = require('mysql');
+var http = require('http');
+var formidable = require('formidable');
+var fs = require('fs');
 
+app.post('/upload', function(req, res){
+    
+    http.createServer(function (req, res) {
+      if (req.url == '/fileupload') {
+        var form = new formidable.IncomingForm();
+        form.parse(req, function (err, fields, files) {
+          var oldpath = files.filetoupload.path;
+          var newpath = './public/' + files.filetoupload.name;
+          fs.rename(oldpath, newpath, function (err) {
+            if (err) throw err;
+            res.write('File uploaded and moved!');
+            res.end();
+          });
+     });
+      } else {
+        res.writeHead(200, {'Content-Type': 'text/html'});
+        res.write('<form action="fileupload" method="post" enctype="multipart/form-data">');
+        res.write('<input type="file" name="filetoupload"><br>');
+        res.write('<input type="submit">');
+        res.write('</form>');
+        return res.end();
+      }
+    }).listen(port);
+});
 app.post('/contactme', function(req, res) {
     var first_name = req.body.first_name,
         last_name = req.body.last_name,
         email = req.body.email,
         phone = req.body.phone;
 
-    const mongo = require('mongodb').MongoClient
-    const uri = "mongodb+srv://admin:password@cluster0-bpngp.mongodb.net/test?retryWrites=true&w=majority"
-    const client = new mongo(uri, {useNewUrlParser: true});
-    mongo.connect((err) => {
+    
+    const url = "mongodb+srv://admin:password@cluster0-bpngp.mongodb.net/test?retryWrites=true&w=majority"
+    const client = new mongo(url, {useNewUrlParser: true});
+    mongo.connect(url, function(err, db) {
+        if(err) {
+            throw err;
+        }
         const collection = client.db("node_project_db").collection("form_submission");
-        collection.insertOne({first_name: {first_name}, last_name: {last_name}, email: {email}, phone: {phone}});
+        var object = [{first_name: {first_name}, last_name: {last_name}, email: {email}, phone: {phone}}];
+        collection("form_submission").insert(object, function(err, res){
+            if(err){
+                throw err;
+            };
+            console.log("Data inserted successfully!");
+            db.close();
+        });
     });
     client.close();
 });
