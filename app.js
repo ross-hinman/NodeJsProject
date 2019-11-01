@@ -69,33 +69,48 @@ app.get('/contactme', function(req, res){
 
 var mysql = require('mysql');
 
+app.post('/contactme', function(req, res) {
+    var first_name = req.body.first_name,
+        last_name = req.body.last_name,
+        email = req.body.email,
+        phone = req.body.phone;
 
-app.post('/contactme', urlencodedParser, (req, res) => {
-    res.send("Thank you for your information!");
-    console.log(req.body.first_name);
-    console.log(req.body.last_name);
-    console.log(req.body.email);
-    console.log(req.body.phone);
-
-    if (req.body.first_name == "" || !req.body.first_name || !req.body.last_name || !req.body.email || !req.body.phone){
-        res.status(500);
-        res.render('error', 'form info is missing, submit first_name, last_name, email, and phone');
-    };
-
-    var con = mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        password: "password",
-        database: "nodeproject_db"
+    const mongo = require('mongodb').MongoClient
+    const uri = "mongodb+srv://admin:password@cluster0-bpngp.mongodb.net/test?retryWrites=true&w=majority"
+    const client = new mongo(uri, {useNewUrlParser: true});
+    mongo.connect((err) => {
+        const collection = client.db("node_project_db").collection("form_submission");
+        collection.insertOne({first_name: {first_name}, last_name: {last_name}, email: {email}, phone: {phone}});
     });
+    client.close();
+});
 
-    con.query("INSERT INTO nodeproject_db.form_submission  (first_name, last_name, email, phone) VALUES('"+req.body.first_name+"', '"+req.body.last_name+"','"+req.body.email+"','"+req.body.phone+"');",
-        function(err, rows){
-            if(err) throw err;
-            console.log(rows[0])
-        }
-    );
-  });
+// app.post('/contactme', urlencodedParser, (req, res) => {
+//     res.send("Thank you for your information!");
+//     console.log(req.body.first_name);
+//     console.log(req.body.last_name);
+//     console.log(req.body.email);
+//     console.log(req.body.phone);
+
+//     if (req.body.first_name == "" || !req.body.first_name || !req.body.last_name || !req.body.email || !req.body.phone){
+//         res.status(500);
+//         res.render('error', 'form info is missing, submit first_name, last_name, email, and phone');
+//     };
+
+//     var con = mysql.createConnection({
+//         host: "localhost",
+//         user: "root",
+//         password: "password",
+//         database: "nodeproject_db"
+//     });
+
+//     con.query("INSERT INTO nodeproject_db.form_submission  (first_name, last_name, email, phone) VALUES('"+req.body.first_name+"', '"+req.body.last_name+"','"+req.body.email+"','"+req.body.phone+"');",
+//         function(err, rows){
+//             if(err) throw err;
+//             console.log(rows[0])
+//         }
+//     );
+//   });
 
 app.listen(port);
 
